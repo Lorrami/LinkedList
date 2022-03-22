@@ -1,7 +1,9 @@
 #pragma once
+#include <iostream>
 
+template <typename T>
 struct Unit
 {
-    int data;
+    T data;
     Unit *next;
 };

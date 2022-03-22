@@ -1,13 +1,63 @@
 #pragma once
 
+#include <iostream>
 #include "Unit.h"
 
+template <typename T>
 class LinkedList
 {
 private:
-    Unit *head;
+    Unit<T> *head;
 public:
     LinkedList();
-    void Add(int element);
+    void Add(const T& element);
+    void Delete();
     void Print();
 };
+
+template<typename T>
+LinkedList<T>::LinkedList()
+{
+    head = nullptr;
+}
+
+template<typename T>
+void LinkedList<T>::Add(const T& element)
+{
+    Unit<T> *newUnit = new Unit<T>;
+
+    newUnit->data = element;
+    newUnit->next = nullptr;
+
+    if(head == nullptr)
+    {
+        head = newUnit;
+    }
+    else
+    {
+        Unit<T> *current = head;
+
+        while(current->next != nullptr)
+            current = current->next;
+
+        current->next = newUnit;
+    }
+}
+
+template<typename T>
+void LinkedList<T>::Delete()
+{
+
+}
+
+template<typename T>
+void LinkedList<T>::Print()
+{
+    Unit<T> *current = head;
+
+    while (current != nullptr)
+    {
+        std::cout << current->data << std::endl;
+        current = current->next;
+    }
+}

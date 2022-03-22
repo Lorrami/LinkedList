@@ -2,11 +2,11 @@
 
 int main()
 {
-    LinkedList myList;
+    LinkedList<std::string> myList;
 
-    myList.Add(34);
-    myList.Add(45);
-    myList.Add(67);
+    myList.Add("First");
+    myList.Add("Second");
+    myList.Add("Third");
 
     myList.Print();
     return 777;
