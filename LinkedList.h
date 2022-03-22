@@ -24,7 +24,14 @@ LinkedList<T>::LinkedList()
 template<typename T>
 LinkedList<T>::~LinkedList()
 {
-    delete *head;
+    Unit<T> *current = head;
+
+    while(current != nullptr)
+    {
+        Unit<T> *previous = current;
+        current = current->next;
+        delete previous;
+    }
 }
 template<typename T>
 void LinkedList<T>::Add(const T& element)
@@ -46,9 +53,7 @@ void LinkedList<T>::Add(const T& element)
             current = current->next;
 
         current->next = newUnit;
-        delete *current;
     }
-    delete *newUnit;
 }
 
 template<typename T>
