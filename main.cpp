@@ -13,5 +13,8 @@ int main()
     std::cout << myList;
     std::cout << myList.Size();
 
+    for (LinkedList<std::string>::Iterator it = myList.begin(); it != myList.end(); it++)
+        std::cout << *it << std::endl;
+
     return 777;
 }
