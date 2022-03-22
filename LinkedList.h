@@ -10,6 +10,7 @@ private:
     Unit<T> *head;
 public:
     LinkedList();
+    ~LinkedList();
     void Add(const T& element);
     void Delete();
     void Print();
@@ -20,7 +21,11 @@ LinkedList<T>::LinkedList()
 {
     head = nullptr;
 }
-
+template<typename T>
+LinkedList<T>::~LinkedList()
+{
+    delete *head;
+}
 template<typename T>
 void LinkedList<T>::Add(const T& element)
 {
@@ -41,7 +46,9 @@ void LinkedList<T>::Add(const T& element)
             current = current->next;
 
         current->next = newUnit;
+        delete *current;
     }
+    delete *newUnit;
 }
 
 template<typename T>
