@@ -5,6 +5,7 @@ set(CMAKE_CXX_STANDARD 14)
 
 set(SOURCES
         "main.cpp"
-        "Unit.cpp")
+        "Unit.cpp"
+        "LinkedList.cpp")
 
 add_executable(LinkedList ${SOURCES})
