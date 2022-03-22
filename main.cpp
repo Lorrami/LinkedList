@@ -11,10 +11,11 @@ int main()
 
     myList.Remove("Red");
     std::cout << myList;
-    std::cout << myList.Size();
+    std::cout << myList.Size() << std::endl;
 
-    for (LinkedList<std::string>::Iterator it = myList.begin(); it != myList.end(); it++)
-        std::cout << *it << std::endl;
+
+    for (auto &value : myList)
+        std::cout << value.data() << std::endl;
 
     return 777;
 }

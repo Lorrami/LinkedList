@@ -42,17 +42,17 @@ private:
 
             ListIterator& operator++()
             {
-                m_currentUnit++;
+                m_currentUnit = m_currentUnit->next;
                 return *this;
             }
-            Type operator->()
+            Type *operator->()
             {
-                return m_currentUnit;
+                return &m_currentUnit->data;
             }
 
-            Type operator*()
+            Type &operator*()
             {
-                return &m_currentUnit;
+                return m_currentUnit->data;
             }
             bool operator==(const ListIterator &other)
             {
@@ -70,12 +70,12 @@ public:
 
     Iterator begin()
     {
-        return head;
+        return Iterator(head);
     }
 
     Iterator end()
     {
-        return nullptr;
+        return Iterator(nullptr);
     }
 };
 template<typename T>
