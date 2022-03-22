@@ -8,13 +8,16 @@ template <typename T>
 class LinkedList
 {
 private:
-    Unit<T> *head;
+    int n = 0;
 public:
+    Unit<T> *head;
     LinkedList();
     ~LinkedList();
+    int Count();
     void Add(const T& element);
     void Delete();
 
+    template<typename T>
     friend std::ostream& operator << (std::ostream &stream, const LinkedList& list);
 };
 template<typename T>
@@ -33,6 +36,12 @@ LinkedList<T>::~LinkedList()
         current = current->next;
         delete previous;
     }
+}
+
+template <typename T>
+int LinkedList<T>::Count()
+{
+    return n;
 }
 template<typename T>
 void LinkedList<T>::Add(const T& element)
@@ -55,6 +64,7 @@ void LinkedList<T>::Add(const T& element)
 
         current->next = newUnit;
     }
+    n++;
 }
 template<typename T>
 void LinkedList<T>::Delete()
@@ -69,7 +79,7 @@ std::ostream& operator<<(std::ostream& os, const LinkedList<T>& list)
 
     while (current != nullptr)
     {
-        os << current->data;
+        os << current->data << std::endl;
         current = current->next;
     }
     return os;

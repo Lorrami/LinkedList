@@ -3,13 +3,14 @@
 
 int main()
 {
-    LinkedList<int> myList;
+    LinkedList<std::string> myList;
 
-    myList.Add(1);
-    myList.Add(1);
-    myList.Add(3);
+    myList.Add("Red");
+    myList.Add("Green");
+    myList.Add("Blue");
 
     std::cout << myList;
+    std::cout << myList.Count();
 
     return 777;
 }
