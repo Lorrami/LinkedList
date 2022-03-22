@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+#include <ostream>
 #include "Unit.h"
 
 template <typename T>
@@ -13,9 +14,9 @@ public:
     ~LinkedList();
     void Add(const T& element);
     void Delete();
-    void Print();
-};
 
+    friend std::ostream& operator << (std::ostream &stream, const LinkedList& list);
+};
 template<typename T>
 LinkedList<T>::LinkedList()
 {
@@ -55,21 +56,21 @@ void LinkedList<T>::Add(const T& element)
         current->next = newUnit;
     }
 }
-
 template<typename T>
 void LinkedList<T>::Delete()
 {
 
 }
 
-template<typename T>
-void LinkedList<T>::Print()
+template <typename T>
+std::ostream& operator<<(std::ostream& os, const LinkedList<T>& list)
 {
-    Unit<T> *current = head;
+    Unit<T> *current = list.head;
 
     while (current != nullptr)
     {
-        std::cout << current->data << std::endl;
+        os << current->data;
         current = current->next;
     }
+    return os;
 }

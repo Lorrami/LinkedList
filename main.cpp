@@ -1,13 +1,15 @@
+#include <iostream>
 #include "LinkedList.h"
 
 int main()
 {
-    LinkedList<std::string> myList;
+    LinkedList<int> myList;
 
-    myList.Add("First");
-    myList.Add("Second");
-    myList.Add("Third");
+    myList.Add(1);
+    myList.Add(1);
+    myList.Add(3);
 
-    myList.Print();
+    std::cout << myList;
+
     return 777;
 }
