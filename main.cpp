@@ -9,6 +9,7 @@ int main()
     myList.Add("Green");
     myList.Add("Blue");
 
+    myList.Remove("Green");
     std::cout << myList;
     std::cout << myList.Count();
 

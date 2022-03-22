@@ -8,14 +8,14 @@ template <typename T>
 class LinkedList
 {
 private:
-    int n = 0;
+    int m_Count = 0;
 public:
     Unit<T> *head;
     LinkedList();
     ~LinkedList();
     int Count();
     void Add(const T& element);
-    void Delete();
+    void Remove(const T& element);
 
     template<typename T>
     friend std::ostream& operator << (std::ostream &stream, const LinkedList& list);
@@ -41,7 +41,7 @@ LinkedList<T>::~LinkedList()
 template <typename T>
 int LinkedList<T>::Count()
 {
-    return n;
+    return m_Count;
 }
 template<typename T>
 void LinkedList<T>::Add(const T& element)
@@ -64,12 +64,30 @@ void LinkedList<T>::Add(const T& element)
 
         current->next = newUnit;
     }
-    n++;
+    m_Count++;
 }
 template<typename T>
-void LinkedList<T>::Delete()
+void LinkedList<T>::Remove(const T& element)
 {
-
+    Unit<T> *current = head;
+    Unit<T> *previous = nullptr;
+    while(current->data != element && current != nullptr)
+    {
+        previous = current;
+        current = current->next;
+    }
+    if(previous == nullptr)
+    {
+        head = current->next;
+        delete current;
+        m_Count--;
+    }
+    else
+    {
+        previous->next = current->next;
+        delete current;
+        m_Count--;
+    }
 }
 
 template <typename T>
