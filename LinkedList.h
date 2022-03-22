@@ -13,7 +13,7 @@ public:
     Unit<T> *head;
     LinkedList();
     ~LinkedList();
-    int Count();
+    int Size();
     void Add(const T& element);
     void Remove(const T& element);
 
@@ -39,7 +39,7 @@ LinkedList<T>::~LinkedList()
 }
 
 template <typename T>
-int LinkedList<T>::Count()
+int LinkedList<T>::Size()
 {
     return m_Count;
 }
