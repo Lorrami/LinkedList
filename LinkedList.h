@@ -27,7 +27,7 @@ public:
 
 public:
 
-    template<typename T>
+    template<typename DefType>
     friend std::ostream &operator<<(std::ostream &stream, const LinkedList &list);
 
 private:
@@ -35,32 +35,31 @@ private:
     template<typename Type>
     class ListIterator
     {
-        private:
-            Unit<T> *m_currentUnit;
         public:
-            explicit ListIterator(Unit<T> *currentUnit) : m_currentUnit(currentUnit){}
+            Unit<T> *currentUnit;
+            explicit ListIterator(Unit<T> *currentUnit) : currentUnit(currentUnit){}
 
             ListIterator& operator++()
             {
-                m_currentUnit = m_currentUnit->next;
+                currentUnit = currentUnit->next;
                 return *this;
             }
             Type *operator->()
             {
-                return &m_currentUnit->data;
+                return &currentUnit->data;
             }
 
             Type &operator*()
             {
-                return m_currentUnit->data;
+                return currentUnit->data;
             }
             bool operator==(const ListIterator &other)
             {
-                return m_currentUnit == other.m_currentUnit;
+                return currentUnit == other.currentUnit;
             }
             bool operator!=(const ListIterator &other)
             {
-                return m_currentUnit != other.m_currentUnit;
+                return currentUnit != other.currentUnit;
             }
     };
 
@@ -77,6 +76,8 @@ public:
     {
         return Iterator(nullptr);
     }
+    void InsertByIterator(Iterator iterator, T element);
+    void RemoveByIterator(Iterator iterator);
 };
 template<typename T>
 LinkedList<T>::LinkedList()
@@ -104,7 +105,7 @@ int LinkedList<T>::Size()
 template<typename T>
 void LinkedList<T>::Add(const T& element)
 {
-    Unit<T> *newUnit = new Unit<T>;
+    auto *newUnit = new Unit<T>;
 
     newUnit->data = element;
     newUnit->next = nullptr;
@@ -146,6 +147,31 @@ void LinkedList<T>::Remove(const T& element)
         delete current;
         m_Count--;
     }
+}
+template<typename T>
+void LinkedList<T>::InsertByIterator(Iterator iterator, T element)
+{
+    Unit<T> *currentUnit = iterator.currentUnit;
+    Unit<T> *newUnit = new Unit<T>;
+
+    if (currentUnit->next == nullptr)
+    {
+        newUnit->data = element;
+        currentUnit->next = newUnit;
+        newUnit->next = nullptr;
+    }
+    else
+    {
+        newUnit->data = element;
+        auto t = currentUnit->next;
+        currentUnit->next = newUnit;
+        newUnit->next = t;
+    }
+}
+template<typename T>
+void LinkedList<T>::RemoveByIterator(Iterator iterator)
+{
+    //Unit<T> currentUnit;
 }
 
 template <typename T>

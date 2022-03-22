@@ -9,13 +9,15 @@ int main()
     myList.Add("Green");
     myList.Add("Blue");
 
-    myList.Remove("Red");
+    //myList.Remove("Red");
+
+    for (auto it = myList.begin(); it != myList.end(); ++it)
+    {
+        if (*it == "Green")
+            myList.InsertByIterator(it, "Imposter");
+    }
+
     std::cout << myList;
-    std::cout << myList.Size() << std::endl;
-
-
-    for (auto &value : myList)
-        std::cout << value.data() << std::endl;
 
     return 777;
 }
