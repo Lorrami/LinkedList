@@ -14,7 +14,13 @@ int main()
     for (auto it = myList.begin(); it != myList.end(); ++it)
     {
         if (*it == "Green")
-            myList.InsertByIterator(it, "Imposter");
+        {
+            myList.InsertAfter(it, "Imposter");
+        }
+        if (*it == "Red")
+        {
+            myList.RemoveAfter(it);
+        }
     }
 
     std::cout << myList;

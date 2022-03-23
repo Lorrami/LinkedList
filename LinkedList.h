@@ -76,8 +76,8 @@ public:
     {
         return Iterator(nullptr);
     }
-    void InsertByIterator(Iterator iterator, T element);
-    void RemoveByIterator(Iterator iterator);
+    void InsertAfter(Iterator iterator, T element);
+    void RemoveAfter(Iterator iterator);
 };
 template<typename T>
 LinkedList<T>::LinkedList()
@@ -149,10 +149,10 @@ void LinkedList<T>::Remove(const T& element)
     }
 }
 template<typename T>
-void LinkedList<T>::InsertByIterator(Iterator iterator, T element)
+void LinkedList<T>::InsertAfter(Iterator iterator, T element)
 {
     Unit<T> *currentUnit = iterator.currentUnit;
-    Unit<T> *newUnit = new Unit<T>;
+    auto *newUnit = new Unit<T>;
 
     if (currentUnit->next == nullptr)
     {
@@ -169,9 +169,19 @@ void LinkedList<T>::InsertByIterator(Iterator iterator, T element)
     }
 }
 template<typename T>
-void LinkedList<T>::RemoveByIterator(Iterator iterator)
+void LinkedList<T>::RemoveAfter(Iterator iterator)
 {
-    //Unit<T> currentUnit;
+    Unit<T> *currentUnit = iterator.currentUnit;
+    if (currentUnit->next == nullptr)
+    {
+        return;
+    }
+    else
+    {
+        Unit<T> *removableUnit = currentUnit->next;
+        currentUnit->next = removableUnit->next;
+        delete removableUnit;
+    }
 }
 
 template <typename T>
