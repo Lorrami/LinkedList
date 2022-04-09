@@ -17,5 +17,23 @@ int main()
         }
     }
     std::cout << myList;
+
+
+    LinkedList<int> testList;
+    /*testList.Add(1);
+    testList.Add(2);
+    testList.Add(3);
+    testList.Add(4);
+     */
+
+    LinkedList<int> newTestList;
+    newTestList.Add(5);
+    newTestList.Add(6);
+    newTestList.Add(7);
+
+    testList = newTestList;
+
+    std::cout << newTestList;
+
     return 777;
 }

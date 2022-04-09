@@ -12,6 +12,7 @@ public:
     Unit<T> *head;
     LinkedList();
     ~LinkedList();
+    LinkedList(const LinkedList &other);
     int Size();
     void Add(const T &element);
     void Remove(const T &element);
@@ -53,20 +54,23 @@ public:
     void InsertAfter(Iterator iterator, T element);
     void RemoveAfter(Iterator iterator);
 };
-template<typename T>
+template <typename T>
 LinkedList<T>::LinkedList() {
     head = nullptr;
 }
-template<typename T>
+template <typename T>
+LinkedList<T>::LinkedList(const LinkedList &other) : head(other.head) {
+
+}
+template <typename T>
 LinkedList<T>::~LinkedList() {
     Unit<T> *current = head;
-    while(current != nullptr) {
+    while (current != nullptr) {
         Unit<T> *previous = current;
         current = current->next;
         delete previous;
     }
 }
-
 template <typename T>
 int LinkedList<T>::Size() {
     return m_Count;
@@ -76,15 +80,14 @@ void LinkedList<T>::Add(const T& element) {
     auto *newUnit = new Unit<T>;
     newUnit->data = element;
     newUnit->next = nullptr;
-    if(head == nullptr) {
+    if (head == nullptr) {
         head = newUnit;
     }
     else {
         Unit<T> *current = head;
-
-        while(current->next != nullptr)
+        while (current->next != nullptr) {
             current = current->next;
-
+        }
         current->next = newUnit;
     }
     m_Count++;
@@ -94,11 +97,11 @@ void LinkedList<T>::Remove(const T& element)
 {
     Unit<T> *current = head;
     Unit<T> *previous = nullptr;
-    while(current->data != element && current != nullptr) {
+    while (current->data != element && current != nullptr) {
         previous = current;
         current = current->next;
     }
-    if(previous == nullptr) {
+    if (previous == nullptr) {
         head = current->next;
         delete current;
         m_Count--;
